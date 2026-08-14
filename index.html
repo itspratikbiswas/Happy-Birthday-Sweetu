@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happiest Birthday, Beautiful! ✨❤️</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="A magical, interactive journey celebrating the birthday of someone truly special. Scroll through our moments and share the love.">
+  <meta property="og:title" content="Happiest Birthday, Beautiful! ✨❤️">
+  <meta property="og:description" content="A magical, interactive journey celebrating your special day.">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Sacramento&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Lottie Player CDN -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  
+  <!-- Custom Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            romantic: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+              950: '#4c0519',
+            }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+            script: ['Sacramento', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom CSS file -->
+  <link rel="stylesheet" href="styles.css">
+
+  
+
+</head>
+<body class="bg-black text-white selection:bg-rose-500 selection:text-white">
+
+ <!-- Fixed Background Image Cross-Fade Layer -->
+  <div class="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none bg-[#1a050d]">
+    <!-- Background images changed to bg-contain to stop cropping, centered, and set to not repeat -->
+    <div id="bg-slide-0" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-6000 ease-in-out opacity-100" style="background-image: url('./ASSETS/background/bg1.jpg');"></div>
+    <div id="bg-slide-1" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-6000 ease-in-out opacity-0" style="background-image: url('./ASSETS/background/bg2.jpg');"></div>
+    <div id="bg-slide-2" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-6000 ease-in-out opacity-0" style="background-image: url('./ASSETS/background/bg3.jpg');"></div>
+    <div id="bg-slide-3" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-6000 ease-in-out opacity-0" style="background-image: url('./ASSETS/background/bg4.jpg');"></div>
+    <div id="bg-slide-4" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-3000 ease-in-out opacity-0" style="background-image: url('./ASSETS/background/bg5.jpg');"></div>
+    <!-- ADD THESE TWO NEW ROWS BELOW -->
+    <div id="bg-slide-5" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-3000 ease-in-out opacity-0" style="background-image: url('./ASSETS/background/bg6.jpg');"></div>
+    <div id="bg-slide-6" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-3000 ease-in-out opacity-0" style="background-image: url('./ASSETS/background/bg7.jpg');"></div>
+
+    <!-- Romantic dark overlay with pink/red ambient glow -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/80"></div>
+    <div class="absolute inset-0 bg-romantic-950/20 mix-blend-color-burn"></div>
+  </div>
+
+
+  <!-- Floating Heart & Sparkle Canvas Layer -->
+  <canvas id="floatingCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-10"></canvas>
+
+  <!-- Ambient background sound toggle (extra charm) -->
+  <div class="fixed top-6 right-6 z-50">
+    <button id="musicToggle" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full p-3.5 shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center">
+      <i id="musicIcon" class="fa-solid fa-volume-xmark text-rose-300"></i>
+    </button>
+    <!-- Romantic instrumental soft music -->
+    <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+  </div>
+
+  <!-- Scroll dots navigation indicator (desktop side panel) -->
+ <div class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-4">
+    <a href="#section-1" data-index="0" class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100 active-dot"></a>
+    <a href="#section-2" data-index="1" class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
+    <a href="#section-3" data-index="2" class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
+    <a href="#section-4" data-index="3" class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
+    <a href="#section-5" data-index="4" class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
+    <a href="#section-6" data-index="5" class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
+    <a href="#section-7" data-index="6" class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
+</div>
+
+
+  <!-- Toast Notification for quotes copy -->
+  <div id="toast" class="toast-notice fixed bottom-8 left-1/2 -translate-x-1/2 bg-gradient-to-r from-rose-600 to-pink-600 backdrop-blur-md border border-rose-400/40 text-white px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-3 z-50 font-medium tracking-wide">
+    <i class="fa-solid fa-heart text-white animate-pulse"></i>
+    <span>Copied quote! Go share the sweetness ❤️</span>
+  </div>
+
+  <!-- Scrolling Content Container -->
+  <main class="relative z-20 h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth" id="scrollContainer">
+
+    <!-- Section 1 -->
+    <section id="section-1" data-bg-index="0" class="relative h-screen w-full flex items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 order-2 lg:order-1">
+          <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-4">
+            <span class="text-rose-400 font-semibold tracking-wider text-xs md:text-sm uppercase block">01 / The Beginning</span>
+            <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-rose-100 font-bold leading-tight">To the One Who Lights Up My Whole Universe ✨</h1>
+            <p class="text-rose-100/80 text-sm md:text-base leading-relaxed font-light">
+              "Some people search a lifetime to find what I discovered in a single moment with you. Today, the world celebrates the day a true angel was born. You make everything brighter, softer, and infinitely more beautiful."
+            </p>
+            
+          </div>
+        </div>
+        <!-- Polaroid Column -->
+        <div class="lg:col-span-5 flex justify-center items-center order-1 lg:order-2 relative mt-8 lg:mt-0">
+          <!-- Floating Lottie Animation -->
+          <div class="absolute -top-10 -right-4 md:-top-16 md:-right-8 w-24 h-24 md:w-32 md:h-32 floating-lottie z-30 pointer-events-none">
+            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_v7g8a1ge.json" background="transparent" speed="1" loop autoplay></lottie-player>
+          </div>
+          <!-- Polaroid Frame -->
+          <div class="polaroid-card relative bg-white p-4 pb-12 rounded-sm shadow-2xl rotate-[-2deg] w-72 md:w-80 cursor-pointer">
+            <div class="tape-effect"></div>
+            <div class="polaroid-photo-container w-full h-64 md:h-72 bg-rose-50 overflow-hidden relative">
+              <img src="./ASSETS/foreground/crush1.jpg" alt="Beautiful Moment 1" class="w-full h-full object-cover">
+            </div>
+            <p class="font-script text-3xl md:text-4xl text-rose-800 text-center mt-4">Pure Magic ✨</p>
+          </div>
+        </div>
+      </div>
+      <!-- Scroll prompt -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-70 animate-bounce pointer-events-none hidden md:flex text-rose-300">
+        <span class="text-xs uppercase tracking-widest font-medium">Scroll down</span>
+        <i class="fa-solid fa-chevron-down text-sm"></i>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="section-2" data-bg-index="1" class="relative h-screen w-full flex items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <!-- Polaroid Column (swap visual hierarchy on desktop for balance) -->
+        <div class="lg:col-span-5 flex justify-center items-center order-1 relative mt-8 lg:mt-0">
+          <!-- Floating Lottie Animation -->
+          <div class="absolute -bottom-10 -left-6 md:-bottom-12 md:-left-12 w-28 h-28 md:w-36 md:h-36 floating-lottie z-30 pointer-events-none">
+            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_fp1b7gpk.json" background="transparent" speed="1.2" loop autoplay></lottie-player>
+          </div>
+          <!-- Polaroid Frame -->
+          <div class="polaroid-card relative bg-white p-4 pb-12 rounded-sm shadow-2xl rotate-[3deg] w-72 md:w-80 cursor-pointer">
+            <div class="tape-effect" style="transform: translateX(-50%) rotate(2deg);"></div>
+            <div class="polaroid-photo-container w-full h-64 md:h-72 bg-rose-50 overflow-hidden relative">
+              <img src="./ASSETS/foreground/crush2.jpg" alt="Beautiful Moment 2" class="w-full h-full object-cover">
+            </div>
+            <p class="font-script text-3xl md:text-4xl text-rose-800 text-center mt-4">Sweeter Than Candy 🍭</p>
+          </div>
+        </div>
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 order-2">
+          <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-4">
+            <span class="text-rose-400 font-semibold tracking-wider text-xs md:text-sm uppercase block">02 / The Feeling</span>
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-rose-100 font-bold leading-tight">My Favorite Thought, Every Single Day 💭</h2>
+            <p class="text-rose-100/80 text-sm md:text-base leading-relaxed font-light">
+              "No matter how chaotic the day gets, the thought of your smile acts as my anchor. In a world full of temporary things, you are my permanent happy place. You are the sweet melody my heart beats to."
+            </p>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="section-3" data-bg-index="2" class="relative h-screen w-full flex items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 order-2 lg:order-1">
+          <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-4">
+            <span class="text-rose-400 font-semibold tracking-wider text-xs md:text-sm uppercase block">03 / The Celebration</span>
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-rose-100 font-bold leading-tight">Wishing You Infinite Joy & Bright Sparkles ✨</h2>
+            <p class="text-rose-100/80 text-sm md:text-base leading-relaxed font-light">
+              "May your day be filled with warm laughter, beautiful surprises, and the same joy you bring to everyone else. Blow the candles, make a wish, and know that you deserve all the love this universe has to offer."
+            </p>
+ 
+          </div>
+        </div>
+        <!-- Polaroid Column -->
+        <div class="lg:col-span-5 flex justify-center items-center order-1 lg:order-2 relative mt-8 lg:mt-0">
+          <!-- Floating Lottie Animation -->
+          <div class="absolute -top-12 -left-6 md:-top-16 md:-left-10 w-24 h-24 md:w-32 md:h-32 floating-lottie z-30 pointer-events-none">
+            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_myejrn5g.json" background="transparent" speed="1" loop autoplay></lottie-player>
+          </div>
+          <!-- Polaroid Frame -->
+          <div class="polaroid-card relative bg-white p-4 pb-12 rounded-sm shadow-2xl rotate-[-3deg] w-72 md:w-80 cursor-pointer">
+            <div class="tape-effect" style="transform: translateX(-50%) rotate(-4deg);"></div>
+            <div class="polaroid-photo-container w-full h-64 md:h-72 bg-rose-50 overflow-hidden relative">
+              <img src="./ASSETS/foreground/crush3.jpg" alt="Beautiful Moment 3" class="w-full h-full object-cover">
+            </div>
+            <p class="font-script text-3xl md:text-4xl text-rose-800 text-center mt-4">Happy Birthday! 🎂</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="section-4" data-bg-index="3" class="relative h-screen w-full flex items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <!-- Polaroid Column -->
+        <div class="lg:col-span-5 flex justify-center items-center order-1 relative mt-8 lg:mt-0">
+          <!-- Floating Lottie Animation -->
+          <div class="absolute -bottom-10 -right-4 md:-bottom-12 md:-right-8 w-28 h-28 md:w-36 md:h-36 floating-lottie z-30 pointer-events-none">
+            <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json" background="transparent" speed="0.8" loop autoplay></lottie-player>
+          </div>
+          <!-- Polaroid Frame -->
+          <div class="polaroid-card relative bg-white p-4 pb-12 rounded-sm shadow-2xl rotate-[2deg] w-72 md:w-80 cursor-pointer">
+            <div class="tape-effect" style="transform: translateX(-50%) rotate(1deg);"></div>
+            <div class="polaroid-photo-container w-full h-64 md:h-72 bg-rose-50 overflow-hidden relative">
+              <img src="./ASSETS/foreground/crush4.jpg" alt="Beautiful Moment 4" class="w-full h-full object-cover">
+            </div>
+            <p class="font-script text-3xl md:text-4xl text-rose-800 text-center mt-4">My Whole Heart ❤️</p>
+          </div>
+        </div>
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 order-2">
+          <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-4">
+            <span class="text-rose-400 font-semibold tracking-wider text-xs md:text-sm uppercase block">04 / The Promise</span>
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-rose-100 font-bold leading-tight">You are My Favorite Kind of Beautiful 🌹</h2>
+            <p class="text-rose-100/80 text-sm md:text-base leading-relaxed font-light">
+              "No words will ever be enough to express how much you mean to me. I promise to cheer you on, support your dreams, and remind you of how extraordinary you are, today and every single day that follows."
+            </p>
+           
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="section-5" data-bg-index="4" class="relative h-screen w-full flex items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 order-2 lg:order-1">
+          <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-4">
+            <span class="text-rose-400 font-semibold tracking-wider text-xs md:text-sm uppercase block">05 / The Wish</span>
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-rose-100 font-bold leading-tight">Happiest Birthday to My Favorite Person! 🎂✨</h2>
+            <p class="text-rose-100/80 text-sm md:text-base leading-relaxed font-light">
+              "Here's to a year of making beautiful memories, achieving all your heart desires, and remaining the radiant soul you are. Happy Birthday, my beautiful crush! You have my heart, always."
+            </p>
+            
+          </div>
+        </div>
+        <!-- Polaroid Column -->
+        <div class="lg:col-span-5 flex justify-center items-center order-1 lg:order-2 relative mt-8 lg:mt-0">
+          <!-- Floating Lottie Animation -->
+          <div class="absolute -top-12 -right-8 w-24 h-24 md:w-36 md:h-36 floating-lottie z-30 pointer-events-none">
+            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_roa4nzec.json" background="transparent" speed="1" loop autoplay></lottie-player>
+          </div>
+          <!-- Polaroid Frame -->
+          <div class="polaroid-card relative bg-white p-4 pb-12 rounded-sm shadow-2xl rotate-[-1deg] w-72 md:w-80 cursor-pointer">
+            <div class="tape-effect" style="transform: translateX(-50%) rotate(-1deg);"></div>
+            <div class="polaroid-photo-container w-full h-64 md:h-72 bg-rose-50 overflow-hidden relative">
+              <img src="./ASSETS/foreground/crush5.jpg" alt="Beautiful Moment 5" class="w-full h-full object-cover">
+            </div>
+            <p class="font-script text-3xl md:text-4xl text-rose-800 text-center mt-4">Happy Birthday! 🎈</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Section 6 -->
+    <section id="section-6" data-bg-index="5" class="relative h-screen w-full flex items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 order-2 lg:order-1">
+          <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-4">
+            <span class="text-rose-400 font-semibold tracking-wider text-xs md:text-sm uppercase block">06 / Another Chapter</span>
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-rose-100 font-bold leading-tight">Grateful for the Good Vibes 🌟</h2>
+            <p class="text-rose-100/80 text-sm md:text-base leading-relaxed font-light">
+              "Every conversation with you is a reminder of how lucky I am to know you. Hope your birthday brings you nothing but the absolute best."
+            </p>
+          </div>
+        </div>
+        <!-- Polaroid Column -->
+        <div class="lg:col-span-5 flex justify-center items-center order-1 lg:order-2 relative mt-8 lg:mt-0">
+          <div class="polaroid-card relative bg-white p-4 pb-12 rounded-sm shadow-2xl rotate-[-2deg] w-72 md:w-80 cursor-pointer">
+            <div class="tape-effect"></div>
+            <div class="polaroid-photo-container w-full h-64 md:h-72 bg-rose-50 overflow-hidden relative">
+              <img src="./ASSETS/foreground/crush6.jpg" alt="Beautiful Moment 6" class="w-full h-full object-cover">
+            </div>
+            <p class="font-script text-3xl md:text-4xl text-rose-800 text-center mt-4">Radiant ✨</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7 -->
+    <section id="section-7" data-bg-index="6" class="relative h-screen w-full flex items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <!-- Polaroid Column (Swapped position for design visual balance) -->
+        <div class="lg:col-span-5 flex justify-center items-center order-1 relative mt-8 lg:mt-0">
+          <div class="polaroid-card relative bg-white p-4 pb-12 rounded-sm shadow-2xl rotate-[3deg] w-72 md:w-80 cursor-pointer">
+            <div class="tape-effect" style="transform: translateX(-50%) rotate(2deg);"></div>
+            <div class="polaroid-photo-container w-full h-64 md:h-72 bg-rose-50 overflow-hidden relative">
+              <img src="./ASSETS/foreground/crush7.jpg" alt="Beautiful Moment 7" class="w-full h-full object-cover">
+            </div>
+            <p class="font-script text-3xl md:text-4xl text-rose-800 text-center mt-4">Keep Smiling 😊</p>
+          </div>
+        </div>
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6 order-2">
+          <div class="glass-panel rounded-3xl p-6 md:p-10 space-y-4">
+            <span class="text-rose-400 font-semibold tracking-wider text-xs md:text-sm uppercase block">07 / The Wrap Up</span>
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-rose-100 font-bold leading-tight">Here's to Making More Memories 🥂</h2>
+            <p class="text-rose-100/80 text-sm md:text-base leading-relaxed font-light">
+              "To wrapping up the perfect day! I'm genuinely so glad you're in my life. Have an incredible night, birthday girl."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- JavaScript logic -->
+  <script src="script.js"></script>
+</body>
+</html>
