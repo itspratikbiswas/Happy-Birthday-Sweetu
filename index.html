@@ -421,22 +421,22 @@
 
     <!-- Section 8: Cake & Candle Countdown Celebration Page -->
     <section id="section-8" data-bg-index="7"
-      class="relative h-screen w-full flex flex-col items-center justify-center snap-start px-4 md:px-12 lg:px-24">
-      <div class="max-w-4xl w-full flex flex-col items-center justify-center text-center z-20 space-y-6">
+      class="relative h-screen w-full flex flex-col items-center justify-center snap-start px-4 md:px-12 lg:px-24 py-4 md:py-6 overflow-hidden">
+      <div class="max-w-4xl w-full flex flex-col items-center justify-center text-center z-20 space-y-2 md:space-y-4 max-h-full">
 
         <!-- Countdown Display Badge -->
         <div id="countdownContainer" class="flex flex-col items-center justify-center transition-all duration-500">
-          <p id="countdownLabel" class="text-rose-300 text-sm md:text-base font-medium tracking-widest uppercase mb-2 animate-pulse">
+          <p id="countdownLabel" class="text-rose-300 text-xs md:text-sm font-medium tracking-widest uppercase mb-1 animate-pulse">
             Make a wish... candle blowing out in
           </p>
           <div id="countdownNumber"
-            class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-rose-500/40 to-pink-500/20 border-2 border-rose-400/60 backdrop-blur-md flex items-center justify-center text-rose-100 font-bold text-4xl md:text-5xl shadow-2xl shadow-rose-500/30">
+            class="w-14 h-14 md:w-18 md:h-18 rounded-full bg-gradient-to-br from-rose-500/40 to-pink-500/20 border-2 border-rose-400/60 backdrop-blur-md flex items-center justify-center text-rose-100 font-bold text-2xl md:text-4xl shadow-xl shadow-rose-500/30">
             3
           </div>
         </div>
 
         <!-- Birthday Cake & Candle Interactive Visual -->
-        <div class="cake-wrapper relative flex flex-col items-center justify-center my-4 scale-100 transition-all duration-500">
+        <div class="cake-wrapper relative flex flex-col items-center justify-center my-1 md:my-2 scale-90 md:scale-100 transition-all duration-500 origin-center">
           
           <!-- Candle & Flame Structure -->
           <div class="candle-container relative flex flex-col items-center z-20">
@@ -487,29 +487,31 @@
 
         <!-- Happy 24th Birthday Reveal Message Container -->
         <div id="birthdayRevealMessage"
-          class="birthday-reveal-box opacity-0 translate-y-8 pointer-events-none transition-all duration-1000 flex flex-col items-center gap-4 max-w-2xl">
+          class="birthday-reveal-box opacity-0 translate-y-4 flex flex-col items-center gap-2 md:gap-3 max-w-2xl px-2">
           <h1
-            class="font-serif text-4xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-300 to-pink-200 font-extrabold tracking-wide drop-shadow-[0_4px_12px_rgba(244,63,94,0.4)] leading-tight">
+            class="font-serif text-3xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-300 to-pink-200 font-extrabold tracking-wide drop-shadow-[0_4px_12px_rgba(244,63,94,0.4)] leading-tight">
             Happy 24th Birthday Sania! 🎉✨
           </h1>
-          <p class="text-rose-100/90 text-base md:text-lg font-light leading-relaxed max-w-xl">
+          <p class="text-rose-100/90 text-sm md:text-base font-light leading-relaxed max-w-xl">
             May your 24th year be filled with endless smiles, magic, unforgettable moments, and every wish of your heart coming true! 💖🎂✨
           </p>
-
-          <div class="flex items-center gap-4 pt-2 pointer-events-auto">
-            <button id="replayWishBtn"
-              class="px-6 py-3 rounded-full bg-rose-500/20 hover:bg-rose-500/40 border border-rose-300/50 text-rose-100 hover:text-white transition-all text-sm font-medium flex items-center gap-2.5 shadow-lg backdrop-blur-md hover:scale-105 active:scale-95">
-              <i class="fa-solid fa-rotate-left text-rose-300"></i>
-              <span>Make Another Wish 🕯️</span>
-            </button>
-          </div>
         </div>
 
       </div>
     </section>
 
-
   </main>
+  
+<!-- Fixed Floating Wish Button -->
+<!-- Changed 'bottom-8' to 'bottom-4' to push it lower -->
+<div id="wishOverlayContainer" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 hidden pointer-events-auto">
+  <button id="newWishBtn" type="button"
+    class="px-6 py-3 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 border border-rose-400/40 text-white font-semibold text-sm flex items-center gap-2.5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer">
+    <i class="fa-solid fa-rotate-left text-white"></i>
+    <span>Make Another Wish 🕯️</span>
+  </button>
+</div>
+
 
   <!-- JavaScript logic -->
   <script src="script.js"></script>

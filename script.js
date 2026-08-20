@@ -10,17 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // -------------------------------------------------------------
-// 1. Dynamic Background Cross-Fade & Dot Navigation
+// 1. Dynamic Background Cross-Fade & Dot Navigation (UPDATED)
 // -------------------------------------------------------------
 function setupBackgroundObserver() {
   const sections = document.querySelectorAll('section');
   const slides = document.querySelectorAll('[id^="bg-slide-"]');
   const dots = document.querySelectorAll('.scroll-dot');
+  const wishContainer = document.getElementById('wishOverlayContainer');
 
   const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.01// Trigger earlier (20% visibility) for responsive fluid scrolling
+    threshold: 0.01 // Trigger earlier for responsive fluid scrolling
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -48,20 +49,24 @@ function setupBackgroundObserver() {
           }
         });
 
-          // 3. ENTRANCE ANIMATION: Super slow, feather-light float up & fade in
+       // REPLACE IT WITH THIS SMALL SAFEGUARD:
+       if (bgIndex !== 7) {
+        if (wishContainer) wishContainer.style.setProperty('display', 'none', 'important');
+       }
+
+
+        // 3. ENTRANCE ANIMATION: Slow float up & fade in
         entry.target.querySelectorAll('.glass-panel, .polaroid-card').forEach(el => {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0px) scale(1)';
-          // Extended to 2500ms (2.5 seconds) with an ultra-soft custom ease-out curve
           el.style.transition = 'transform 2500ms cubic-bezier(0.1, 1, 0.1, 1), opacity 2500ms ease-out';
         });
 
       } else {
-        // 4. EXIT ANIMATION: Slow, continuous dissolve upwards as it leaves
+        // 4. EXIT ANIMATION: Slow continuous dissolve upwards
         entry.target.querySelectorAll('.glass-panel, .polaroid-card').forEach(el => {
           el.style.opacity = '0';
           el.style.transform = 'translateY(-50px) scale(0.95)';
-          // Extended to 2000ms (2 seconds) so it dissolves gently without snapping away
           el.style.transition = 'transform 2000ms cubic-bezier(0.1, 1, 0.1, 1), opacity 2000ms ease-in-out';
         });
       }
@@ -332,9 +337,8 @@ function setupAudioPlayer() {
   window.addEventListener('click', playOnFirstTouch);
   window.addEventListener('scroll', playOnFirstTouch);
 }
-
 // -------------------------------------------------------------
-// 6. Cake & Candle Countdown Celebration Logic
+// 6. Cake & Candle Countdown Celebration Logic (FULLY FIXED)
 // -------------------------------------------------------------
 function setupCakeCountdown() {
   const directToCakeBtn = document.getElementById('directToCakeBtn');
@@ -345,7 +349,10 @@ function setupCakeCountdown() {
   const flameGlow = document.getElementById('flameGlow');
   const candleSmoke = document.getElementById('candleSmoke');
   const birthdayRevealMessage = document.getElementById('birthdayRevealMessage');
-  const replayWishBtn = document.getElementById('replayWishBtn');
+  
+  // Target the new floating button elements
+  const newWishBtn = document.getElementById('newWishBtn');
+  const wishOverlayContainer = document.getElementById('wishOverlayContainer');
 
   let countdownInterval = null;
   let isCountingDown = false;
@@ -376,9 +383,49 @@ function setupCakeCountdown() {
     sectionObserver.observe(section8);
   }
 
+  function resetState() {
+    // 1. Instantly hide the button container when a restart begins
+    if (wishOverlayContainer) {
+      wishOverlayContainer.style.setProperty('display', 'none', 'important');
+    }
+
+    // Cancel any running countdown
+    if (countdownInterval) {
+      clearInterval(countdownInterval);
+      countdownInterval = null;
+    }
+    isCountingDown = false;
+    hasCompleted = false;
+
+    // Restore countdown UI
+    const countdownContainer = document.getElementById('countdownContainer');
+    if (countdownContainer) countdownContainer.classList.remove('hide-countdown');
+    countdownLabel.innerText = "Make a wish... candle blowing out in";
+    countdownNumber.innerText = "3";
+
+    // Restore cake/candle visuals
+    if(candleFlame) candleFlame.classList.remove('extinguished');
+    if(flameGlow) flameGlow.classList.remove('extinguished');
+    if(candleSmoke) {
+      candleSmoke.classList.remove('opacity-100');
+      candleSmoke.classList.add('opacity-0');
+    }
+
+    const cakeWrapper = document.querySelector('.cake-wrapper');
+    if (cakeWrapper) cakeWrapper.classList.remove('scale-75', 'md:scale-90');
+
+    // Hide the reveal message cleanly
+    if (birthdayRevealMessage) birthdayRevealMessage.classList.remove('show-reveal');
+  }
+
   function startCountdown() {
     if (isCountingDown || hasCompleted) return;
     isCountingDown = true;
+
+    // Keep floating button hidden while counting down
+    if (wishOverlayContainer) {
+      wishOverlayContainer.style.setProperty('display', 'none', 'important');
+    }
 
     let count = 3;
     countdownNumber.innerText = count;
@@ -394,8 +441,9 @@ function setupCakeCountdown() {
         countdownNumber.innerText = "0";
         countdownNumber.classList.add('scale-125');
         setTimeout(() => countdownNumber.classList.remove('scale-125'), 200);
-        
+
         clearInterval(countdownInterval);
+        countdownInterval = null;
         extinguishCandle();
       }
     }, 1000);
@@ -406,20 +454,24 @@ function setupCakeCountdown() {
     hasCompleted = true;
 
     // 1. Extinguish flame & ambient glow
-    candleFlame.classList.add('extinguished');
-    flameGlow.classList.add('extinguished');
+    if(candleFlame) candleFlame.classList.add('extinguished');
+    if(flameGlow) flameGlow.classList.add('extinguished');
 
     // 2. Trigger rising smoke effect
-    candleSmoke.classList.remove('opacity-0');
-    candleSmoke.classList.add('opacity-100');
+    if(candleSmoke) {
+      candleSmoke.classList.remove('opacity-0');
+      candleSmoke.classList.add('opacity-100');
+    }
 
     // 3. Heart & Sparkle burst celebration cannons around cake
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2 - 50;
 
-    createHeartBurst(centerX, centerY);
-    setTimeout(() => createHeartBurst(centerX - 120, centerY + 40), 200);
-    setTimeout(() => createHeartBurst(centerX + 120, centerY + 40), 400);
+    if (typeof createHeartBurst === "function") {
+      createHeartBurst(centerX, centerY);
+      setTimeout(() => createHeartBurst(centerX - 120, centerY + 40), 200);
+      setTimeout(() => createHeartBurst(centerX + 120, centerY + 40), 400);
+    }
 
     // 4. Update Countdown badge to completion message
     setTimeout(() => {
@@ -428,33 +480,26 @@ function setupCakeCountdown() {
       countdownNumber.classList.remove('animate-pulse');
     }, 600);
 
-    // 5. Grand reveal of "Happy 24th Birthday Sania!"
+    // 5. Grand reveal of message box & slow fade-in of the interactive "Make Another Wish" button
     setTimeout(() => {
-      birthdayRevealMessage.classList.add('show-reveal');
-    }, 1000);
+      if (birthdayRevealMessage) birthdayRevealMessage.classList.add('show-reveal');
+      const countdownContainer = document.getElementById('countdownContainer');
+      if (countdownContainer) countdownContainer.classList.add('hide-countdown');
+      const cakeWrapper = document.querySelector('.cake-wrapper');
+      if (cakeWrapper) cakeWrapper.classList.add('scale-75', 'md:scale-90');
+
+      // REVEAL BUTTON OVERLAY HERE: Exactly when the countdown finishes and messages show!
+      if (wishOverlayContainer) {
+        wishOverlayContainer.style.setProperty('display', 'flex', 'important');
+      }
+    }, 1900);
   }
 
-  // Replay Wish Handler
-  if (replayWishBtn) {
-    replayWishBtn.addEventListener('click', () => {
-      hasCompleted = false;
-      isCountingDown = false;
-      clearInterval(countdownInterval);
-
-      birthdayRevealMessage.classList.remove('show-reveal');
-
-      candleFlame.classList.remove('extinguished');
-      flameGlow.classList.remove('extinguished');
-
-      candleSmoke.classList.add('opacity-0');
-      candleSmoke.classList.remove('opacity-100');
-
-      countdownLabel.innerText = "Make a wish... candle blowing out in";
-      countdownNumber.innerText = "3";
-
-      setTimeout(() => {
-        startCountdown();
-      }, 500);
+  // Hook the new floating button listener inside the state system
+  if (newWishBtn) {
+    newWishBtn.addEventListener('click', () => {
+      resetState();
+      setTimeout(() => startCountdown(), 600);
     });
   }
 }

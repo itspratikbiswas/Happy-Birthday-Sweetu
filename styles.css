@@ -364,9 +364,89 @@ div[id*="slide"] {
   margin-top: -4px;
 }
 
-/* Birthday Reveal Styling */
+/* Birthday Reveal Styling & Responsive Collapse */
+.birthday-reveal-box {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+}
+
+/* Ensure the replay button is always independently clickable */
+#replayWishBtn {
+  pointer-events: auto !important;
+}
+
 .birthday-reveal-box.show-reveal {
   opacity: 1 !important;
   transform: translateY(0) scale(1) !important;
   pointer-events: auto !important;
 }
+
+#countdownContainer {
+  transition: opacity 0.5s ease, max-height 0.5s ease, margin 0.5s ease;
+  max-height: 200px;
+}
+
+#countdownContainer.hide-countdown {
+  opacity: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Force Section 8's interactive row to the front */
+#section-8 .relative.isolate {
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+  position: relative;
+}
+
+/* Ensure the button specifically has the pointer cursor */
+#replayWishBtn {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 10000 !important;
+}
+
+/* 1. Global Reset for the active birthday card zone */
+#section-8 {
+  position: relative !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}
+
+/* 2. Force the container to release pointer event locks */
+#section-8 .birthday-reveal-box,
+#section-8 .glass-panel {
+  pointer-events: auto !important;
+}
+
+/* 3. Brute-force the button element to the absolute top of the DOM stack */
+#replayWishBtn {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 999999 !important;
+}
+
+/* Ensure the floating wish button container overrides absolutely everything */
+#wishOverlayContainer {
+  z-index: 999999 !important;
+  pointer-events: auto !important;
+}
+
+#newWishBtn {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Optional rotation animation for the icon */
+.animate-spin-slow {
+  animation: spin 4s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
