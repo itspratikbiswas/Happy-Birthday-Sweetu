@@ -487,15 +487,26 @@
 
         <!-- Happy 24th Birthday Reveal Message Container -->
         <div id="birthdayRevealMessage"
-          class="birthday-reveal-box opacity-0 translate-y-4 flex flex-col items-center gap-2 md:gap-3 max-w-2xl px-2">
-          <h1
-            class="font-serif text-3xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-300 to-pink-200 font-extrabold tracking-wide drop-shadow-[0_4px_12px_rgba(244,63,94,0.4)] leading-tight">
-            Happy 24th Birthday Sania! 🎉✨
-          </h1>
-          <p class="text-rose-100/90 text-sm md:text-base font-light leading-relaxed max-w-xl">
-            May your 24th year be filled with endless smiles, magic, unforgettable moments, and every wish of your heart coming true! 💖🎂✨
-          </p>
-        </div>
+     class="birthday-reveal-box opacity-0 translate-y-4 flex flex-col items-center gap-2 md:gap-3 max-w-2xl px-2">
+     
+  <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-wide drop-shadow-[0_4px_12px_rgba(244,63,94,0.4)] leading-tight text-white">
+    <!-- The text keeps the beautiful gradient -->
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-300 to-pink-200">
+      Happy 24th Birthday 
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-300 to-pink-200">
+          Sania!
+        </span>
+    </span>
+    <!-- The emojis stay outside the gradient so they keep their original colors -->
+    <span class="inline-block not-italic">🎉✨</span>
+  </h1>
+
+  <p class="text-rose-100/90 text-sm md:text-base font-light leading-relaxed max-w-xl">
+    May your 24th year be filled with endless smiles, magic, unforgettable moments, and every wish of your heart coming true! 
+    <!-- Separated paragraph emojis to override text-color inheritance locks -->
+    <span class="text-white inline-block not-italic">💖🎂✨</span>
+  </p>
+</div>
 
       </div>
     </section>
