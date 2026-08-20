@@ -96,6 +96,9 @@
     <div id="bg-slide-6"
       class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-3000 ease-in-out opacity-0"
       style="background-image: url('./ASSETS/background/bg7.jpg');"></div>
+    <div id="bg-slide-7"
+      class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-3000 ease-in-out opacity-0"
+      style="background-image: url('./ASSETS/background/bg1.jpg');"></div>
 
     <!-- Romantic dark overlay with pink/red ambient glow -->
     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/80"></div>
@@ -132,6 +135,8 @@
       class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
     <a href="#section-7" data-index="6"
       class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100"></a>
+    <a href="#section-8" data-index="7"
+      class="scroll-dot w-3 h-3 rounded-full bg-white/30 border border-white/50 transition-all duration-300 hover:bg-rose-400 scale-100" title="Make a Wish & Cake"></a>
   </div>
 
 
@@ -402,8 +407,104 @@
               "To wrapping up the perfect day! I'm genuinely so glad you're in my life. Have an incredible night,
               birthday girl."
             </p>
+            <div class="pt-4">
+              <button id="directToCakeBtn"
+                class="inline-flex items-center gap-3 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:to-pink-700 text-white font-semibold px-6 py-3.5 rounded-full shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 hover:scale-105 active:scale-95 transition-all duration-300">
+                <span>Make a Wish & Blow Candle 🎂✨</span>
+                <i class="fa-solid fa-arrow-right animate-pulse"></i>
+              </button>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Cake & Candle Countdown Celebration Page -->
+    <section id="section-8" data-bg-index="7"
+      class="relative h-screen w-full flex flex-col items-center justify-center snap-start px-4 md:px-12 lg:px-24">
+      <div class="max-w-4xl w-full flex flex-col items-center justify-center text-center z-20 space-y-6">
+
+        <!-- Countdown Display Badge -->
+        <div id="countdownContainer" class="flex flex-col items-center justify-center transition-all duration-500">
+          <p id="countdownLabel" class="text-rose-300 text-sm md:text-base font-medium tracking-widest uppercase mb-2 animate-pulse">
+            Make a wish... candle blowing out in
+          </p>
+          <div id="countdownNumber"
+            class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-rose-500/40 to-pink-500/20 border-2 border-rose-400/60 backdrop-blur-md flex items-center justify-center text-rose-100 font-bold text-4xl md:text-5xl shadow-2xl shadow-rose-500/30">
+            3
+          </div>
+        </div>
+
+        <!-- Birthday Cake & Candle Interactive Visual -->
+        <div class="cake-wrapper relative flex flex-col items-center justify-center my-4 scale-100 transition-all duration-500">
+          
+          <!-- Candle & Flame Structure -->
+          <div class="candle-container relative flex flex-col items-center z-20">
+            <!-- Wispy Smoke Effect (Triggered on blow-out) -->
+            <div id="candleSmoke" class="candle-smoke opacity-0">
+              <div class="smoke-particle p1"></div>
+              <div class="smoke-particle p2"></div>
+              <div class="smoke-particle p3"></div>
+            </div>
+
+            <!-- Candle Flame -->
+            <div id="candleFlame" class="candle-flame">
+              <div class="flame-inner"></div>
+            </div>
+
+            <!-- Flame Ambient Glow -->
+            <div id="flameGlow" class="flame-glow"></div>
+
+            <!-- Candle Wick -->
+            <div class="candle-wick"></div>
+
+            <!-- Candle Body with "24" badge -->
+            <div class="candle-stick">
+              <span class="candle-number">24</span>
+            </div>
+          </div>
+
+          <!-- Birthday Cake Structure -->
+          <div class="cake-box relative flex flex-col items-center">
+            <!-- Frosting Top Layer & Drips -->
+            <div class="cake-tier tier-top relative flex justify-center items-center">
+              <div class="frosting-top"></div>
+              <div class="decorations flex gap-4 text-xs">
+                <span>✨</span><span>🌸</span><span>✨</span>
+              </div>
+            </div>
+            <!-- Bottom Layer -->
+            <div class="cake-tier tier-bottom relative flex justify-center items-center">
+              <div class="frosting-bottom"></div>
+              <div class="decorations flex gap-6 text-sm">
+                <span>🍓</span><span>✨</span><span>🍓</span><span>✨</span><span>🍓</span>
+              </div>
+            </div>
+            <!-- Cake Plate Stand -->
+            <div class="cake-plate"></div>
+          </div>
+        </div>
+
+        <!-- Happy 24th Birthday Reveal Message Container -->
+        <div id="birthdayRevealMessage"
+          class="birthday-reveal-box opacity-0 translate-y-8 pointer-events-none transition-all duration-1000 flex flex-col items-center gap-4 max-w-2xl">
+          <h1
+            class="font-serif text-4xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-rose-300 to-pink-200 font-extrabold tracking-wide drop-shadow-[0_4px_12px_rgba(244,63,94,0.4)] leading-tight">
+            Happy 24th Birthday Sania! 🎉✨
+          </h1>
+          <p class="text-rose-100/90 text-base md:text-lg font-light leading-relaxed max-w-xl">
+            May your 24th year be filled with endless smiles, magic, unforgettable moments, and every wish of your heart coming true! 💖🎂✨
+          </p>
+
+          <div class="flex items-center gap-4 pt-2 pointer-events-auto">
+            <button id="replayWishBtn"
+              class="px-6 py-3 rounded-full bg-rose-500/20 hover:bg-rose-500/40 border border-rose-300/50 text-rose-100 hover:text-white transition-all text-sm font-medium flex items-center gap-2.5 shadow-lg backdrop-blur-md hover:scale-105 active:scale-95">
+              <i class="fa-solid fa-rotate-left text-rose-300"></i>
+              <span>Make Another Wish 🕯️</span>
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
 

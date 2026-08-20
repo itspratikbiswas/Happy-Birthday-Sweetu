@@ -160,3 +160,213 @@ div[id*="slide"] {
   transition: opacity 3000ms ease-in-out !important;
   will-change: opacity;
 }
+
+/* ========================================================
+   CAKE & CANDLE ANIMATIONS & STYLING
+   ======================================================== */
+
+/* Candle Flame animation */
+@keyframes flame-flicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 1;
+    border-radius: 50% 50% 20% 20%;
+  }
+  25% {
+    transform: scale(1.08, 0.95) rotate(2deg);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(0.95, 1.1) rotate(-2deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.05, 1.02) rotate(1deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes flame-glow-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+}
+
+.candle-flame {
+  width: 22px;
+  height: 38px;
+  background: linear-gradient(to top, #ff4500, #ff8c00, #ffd700, #ffffff);
+  border-radius: 50% 50% 35% 35%;
+  box-shadow: 0 0 20px #ff7700, 0 0 35px #ffaa00;
+  animation: flame-flicker 1.2s ease-in-out infinite;
+  transform-origin: bottom center;
+  position: relative;
+  z-index: 10;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.candle-flame.extinguished {
+  transform: scale(0) translateY(10px) !important;
+  opacity: 0 !important;
+}
+
+.flame-inner {
+  width: 10px;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.9;
+}
+
+.flame-glow {
+  position: absolute;
+  top: -10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 180, 50, 0.5) 0%, rgba(255, 80, 100, 0) 70%);
+  animation: flame-glow-pulse 1.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.6s ease;
+}
+
+.flame-glow.extinguished {
+  opacity: 0 !important;
+}
+
+/* Candle Wick & Stick */
+.candle-wick {
+  width: 4px;
+  height: 10px;
+  background: #333;
+  border-radius: 2px;
+  margin-top: -2px;
+}
+
+.candle-stick {
+  width: 22px;
+  height: 58px;
+  background: linear-gradient(90deg, #fb7185, #fda4af, #f43f5e);
+  border-radius: 6px 6px 0 0;
+  box-shadow: inset -3px 0 6px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.candle-number {
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(0,0,0,0.25);
+  padding: 2px 4px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* Candle Smoke Animation */
+@keyframes smoke-float {
+  0% {
+    transform: translate(-50%, 0) scale(0.6);
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx, 10px)), -70px) scale(2.5);
+    opacity: 0;
+  }
+}
+
+.candle-smoke {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 30;
+  transition: opacity 0.3s ease;
+}
+
+.smoke-particle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: rgba(220, 220, 220, 0.7);
+  border-radius: 50%;
+  filter: blur(4px);
+  animation: smoke-float 2.5s ease-out forwards;
+}
+
+.smoke-particle.p1 { --dx: -15px; animation-delay: 0s; }
+.smoke-particle.p2 { --dx: 12px;  animation-delay: 0.2s; }
+.smoke-particle.p3 { --dx: -5px;  animation-delay: 0.4s; }
+
+/* Cake Layers */
+.cake-box {
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+}
+
+.cake-tier {
+  border-radius: 12px 12px 6px 6px;
+  box-shadow: inset 0 -4px 8px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.tier-top {
+  width: 160px;
+  height: 60px;
+  background: linear-gradient(180deg, #fecdd3 0%, #f43f5e 100%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  z-index: 10;
+}
+
+.tier-bottom {
+  width: 220px;
+  height: 75px;
+  background: linear-gradient(180deg, #ffe4e6 0%, #be123c 100%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  margin-top: -6px;
+  z-index: 5;
+}
+
+.frosting-top, .frosting-bottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 12px;
+  opacity: 0.9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.cake-plate {
+  width: 260px;
+  height: 14px;
+  background: linear-gradient(90deg, #e2e8f0, #ffffff, #cbd5e1);
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  margin-top: -4px;
+}
+
+/* Birthday Reveal Styling */
+.birthday-reveal-box.show-reveal {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  pointer-events: auto !important;
+}

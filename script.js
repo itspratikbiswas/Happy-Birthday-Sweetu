@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupFloatingCanvas();
   setupQuoteSharing();
   setupAudioPlayer();
+  setupCakeCountdown();
 });
 
 // -------------------------------------------------------------
@@ -330,4 +331,130 @@ function setupAudioPlayer() {
 
   window.addEventListener('click', playOnFirstTouch);
   window.addEventListener('scroll', playOnFirstTouch);
+}
+
+// -------------------------------------------------------------
+// 6. Cake & Candle Countdown Celebration Logic
+// -------------------------------------------------------------
+function setupCakeCountdown() {
+  const directToCakeBtn = document.getElementById('directToCakeBtn');
+  const section8 = document.getElementById('section-8');
+  const countdownNumber = document.getElementById('countdownNumber');
+  const countdownLabel = document.getElementById('countdownLabel');
+  const candleFlame = document.getElementById('candleFlame');
+  const flameGlow = document.getElementById('flameGlow');
+  const candleSmoke = document.getElementById('candleSmoke');
+  const birthdayRevealMessage = document.getElementById('birthdayRevealMessage');
+  const replayWishBtn = document.getElementById('replayWishBtn');
+
+  let countdownInterval = null;
+  let isCountingDown = false;
+  let hasCompleted = false;
+
+  // Direct Button Navigation from Section 7
+  if (directToCakeBtn) {
+    directToCakeBtn.addEventListener('click', () => {
+      section8.scrollIntoView({ behavior: 'smooth' });
+      startCountdown();
+    });
+  }
+
+  // Auto start countdown when Section 8 comes into view
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasCompleted && !isCountingDown) {
+        setTimeout(() => {
+          if (!hasCompleted && !isCountingDown) {
+            startCountdown();
+          }
+        }, 800);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  if (section8) {
+    sectionObserver.observe(section8);
+  }
+
+  function startCountdown() {
+    if (isCountingDown || hasCompleted) return;
+    isCountingDown = true;
+
+    let count = 3;
+    countdownNumber.innerText = count;
+    countdownLabel.innerText = "Make a wish... candle blowing out in";
+
+    countdownInterval = setInterval(() => {
+      count--;
+      if (count > 0) {
+        countdownNumber.innerText = count;
+        countdownNumber.classList.add('scale-125');
+        setTimeout(() => countdownNumber.classList.remove('scale-125'), 200);
+      } else if (count === 0) {
+        countdownNumber.innerText = "0";
+        countdownNumber.classList.add('scale-125');
+        setTimeout(() => countdownNumber.classList.remove('scale-125'), 200);
+        
+        clearInterval(countdownInterval);
+        extinguishCandle();
+      }
+    }, 1000);
+  }
+
+  function extinguishCandle() {
+    isCountingDown = false;
+    hasCompleted = true;
+
+    // 1. Extinguish flame & ambient glow
+    candleFlame.classList.add('extinguished');
+    flameGlow.classList.add('extinguished');
+
+    // 2. Trigger rising smoke effect
+    candleSmoke.classList.remove('opacity-0');
+    candleSmoke.classList.add('opacity-100');
+
+    // 3. Heart & Sparkle burst celebration cannons around cake
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2 - 50;
+
+    createHeartBurst(centerX, centerY);
+    setTimeout(() => createHeartBurst(centerX - 120, centerY + 40), 200);
+    setTimeout(() => createHeartBurst(centerX + 120, centerY + 40), 400);
+
+    // 4. Update Countdown badge to completion message
+    setTimeout(() => {
+      countdownLabel.innerText = "Wish Granted! ✨";
+      countdownNumber.innerText = "🎉";
+      countdownNumber.classList.remove('animate-pulse');
+    }, 600);
+
+    // 5. Grand reveal of "Happy 24th Birthday Sania!"
+    setTimeout(() => {
+      birthdayRevealMessage.classList.add('show-reveal');
+    }, 1000);
+  }
+
+  // Replay Wish Handler
+  if (replayWishBtn) {
+    replayWishBtn.addEventListener('click', () => {
+      hasCompleted = false;
+      isCountingDown = false;
+      clearInterval(countdownInterval);
+
+      birthdayRevealMessage.classList.remove('show-reveal');
+
+      candleFlame.classList.remove('extinguished');
+      flameGlow.classList.remove('extinguished');
+
+      candleSmoke.classList.add('opacity-0');
+      candleSmoke.classList.remove('opacity-100');
+
+      countdownLabel.innerText = "Make a wish... candle blowing out in";
+      countdownNumber.innerText = "3";
+
+      setTimeout(() => {
+        startCountdown();
+      }, 500);
+    });
+  }
 }
