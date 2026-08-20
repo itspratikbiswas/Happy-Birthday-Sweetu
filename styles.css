@@ -450,3 +450,14 @@ div[id*="slide"] {
   to { transform: rotate(-360deg); }
 }
 
+/* Brute force native multi-color emoticons to drop inherited color overrides */
+#birthdayRevealMessage span,
+#birthdayRevealMessage p span {
+  color: unset !important;
+  background: unset !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: initial !important;
+  text-shadow: none !important;
+}
+
